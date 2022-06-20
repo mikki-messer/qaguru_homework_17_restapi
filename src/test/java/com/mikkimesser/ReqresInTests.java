@@ -15,8 +15,7 @@ public class ReqresInTests {
 
     @Test
     @DisplayName("Проверка получения данных существующего пользователя по id")
-    public void singleUserEmailByIdTest()
-    {
+    public void singleUserEmailByIdTest() {
         String endpoint = "https://reqres.in/api/users/3";
 
         given()
@@ -33,8 +32,7 @@ public class ReqresInTests {
 
     @Test
     @DisplayName("Проверка структуры массива data для элемента списка ресурсов")
-    public  void resourceListTest()
-    {
+    public void resourceListTest() {
         String endpoint = "https://reqres.in/api/unknown";
 
         given()
@@ -55,15 +53,13 @@ public class ReqresInTests {
 
     @Test
     @DisplayName("Проверка эндпойнта создания пользователя")
-    public void createUserTest()
-    {
+    public void createUserTest() {
         String endpoint = "https://reqres.in/api/user";
 
         String name = faker.name().firstName();
         String job = faker.job().position();
 
         String payload = String.format("{ \"name\": \"%s\", \"job\": \"%s\" }", name, job);
-
 
         given()
                 .log().uri()
@@ -77,14 +73,12 @@ public class ReqresInTests {
                 .log().status()
                 .log().body()
                 .body("name", is(name))
-                .body("job", is(job))
-                ;
+                .body("job", is(job));
     }
 
     @Test
     @DisplayName("Проверка статуса ответа при удалении пользователя")
-    public void deleteUserTest()
-    {
+    public void deleteUserTest() {
         String endpoint = "https://reqres.in/api/users/4";
 
         given()
@@ -97,8 +91,7 @@ public class ReqresInTests {
 
     @Test
     @DisplayName("Проверка обновления пользователя с помощью PUT")
-    public void updateUserTest()
-    {
+    public void updateUserTest() {
         String endpoint = "https://reqres.in/api/users/4";
 
         String name = faker.name().firstName();
@@ -118,8 +111,7 @@ public class ReqresInTests {
                 .log().status()
                 .log().body()
                 .body("name", is(name))
-                .body("job", is(job))
-        ;
+                .body("job", is(job));
     }
 
 }
