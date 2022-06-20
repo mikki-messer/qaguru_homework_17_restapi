@@ -1,4 +1,4 @@
-# Simple 5 automated API tests for <a href = "https://reqres.in/" target ="_blank">reqres.in</a>
+# Пять простых автоматизированных API-тестов для <a href = "https://reqres.in/" target ="_blank">reqres.in</a>
 
 - Проверка получения данных существующего пользователя по id
 - Проверка структуры массива data для элемента списка ресурсов

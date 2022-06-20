@@ -1,5 +1,6 @@
 package com.mikkimesser;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,10 @@ import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsMapContaining.hasKey;
 
-public class RegresInTests {
+public class ReqresInTests {
+
+    Faker faker = new Faker();
+
     @Test
     @DisplayName("Проверка получения данных существующего пользователя по id")
     public void singleUserEmailByIdTest()
@@ -47,7 +51,6 @@ public class RegresInTests {
                 .body("data[0]", hasKey("name"))
                 .body("data[0]", hasKey("color"))
                 .body("data[0]", hasKey("pantone_value"));
-        ;
     }
 
     @Test
@@ -56,7 +59,11 @@ public class RegresInTests {
     {
         String endpoint = "https://reqres.in/api/user";
 
-        String payload = "{ \"name\": \"mikki\", \"job\": \"engineer\" }";
+        String name = faker.name().firstName();
+        String job = faker.job().position();
+
+        String payload = String.format("{ \"name\": \"%s\", \"job\": \"%s\" }", name, job);
+
 
         given()
                 .log().uri()
@@ -69,8 +76,8 @@ public class RegresInTests {
                 .statusCode(201)
                 .log().status()
                 .log().body()
-                .body("name", is("mikki"))
-                .body("job", is("engineer"))
+                .body("name", is(name))
+                .body("job", is(job))
                 ;
     }
 
@@ -93,7 +100,11 @@ public class RegresInTests {
     public void updateUserTest()
     {
         String endpoint = "https://reqres.in/api/users/4";
-        String payload = "{ \"name\": \"morpheus\", \"job\": \"zion resident\" }";
+
+        String name = faker.name().firstName();
+        String job = faker.job().position();
+
+        String payload = String.format("{ \"name\": \"%s\", \"job\": \"%s\" }", name, job);
 
         given()
                 .log().uri()
@@ -106,8 +117,8 @@ public class RegresInTests {
                 .statusCode(200)
                 .log().status()
                 .log().body()
-                .body("name", is("morpheus"))
-                .body("job", is("zion resident"))
+                .body("name", is(name))
+                .body("job", is(job))
         ;
     }
 
